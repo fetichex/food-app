@@ -1,12 +1,18 @@
-const { Router } = require('express');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+const { Router } = require('express'),
+  router = Router(),
+  recipeRoute = require('./recipes.js'),
+  typeRoute = require('./diets.js')
 
+const Diets = require('../db.js').Diets
 
-const router = Router();
+router.use('/recipes', recipeRoute)
+router.use('/diets', typeRoute)
+router.use("/prueba", async (req, res) => {
+  let data = await Diets.findAll({
+    attributes: ["id", "name"],
+    where: {id:[1, 3, 5, 7]}
+  });
+  res.send(data);
+});
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
-
-
-module.exports = router;
+module.exports = router
