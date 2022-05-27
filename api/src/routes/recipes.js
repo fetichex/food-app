@@ -1,22 +1,45 @@
-const { Router } = require('express')
-const router = Router()
-const axios = require('axios')
+require("dotenv").config();
+const { Router } = require("express"),
+  router = Router(),
+  {
+    getRecipeById,
+    getRecipeByName,
+    createRecipe,
+  } = require("../controllers/recipes");
 
-const { Recipes, Diets } = require('../db.js')
-
-const { v4: uuidv4 } = require('uuid')
-
-const { PATH, API_KEY } = process.env
-
-const UUID = new RegExp(
-  '^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$'
-)
-
-router.get('/', async (req, res, next) => {
-  const { name, toGet } = req.query
-  if (!name) {
-    
+router.get("/:idRecipe", async (request, response, next) => {
+  const { idRecipe } = request.params;
+  try {
+    const recipe = await getRecipeById(idRecipe);
+    response.send(recipe);
+  } catch (error) {
+    next(error);
   }
-})
+});
 
-module.exports = router
+router.get("/", async (request, response, next) => {
+  const { name } = request.query;
+  try {
+    const recipe = await getRecipeByName(name);
+
+    if (recipe.status === 404) {
+      response.status(404).send(recipe);
+    } else {
+      response.status(200).send(recipe);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/", async (request, response, next) => {
+  const { name, summary, health, steps } = request.body;
+  try {
+    const recipe = await createRecipe(name, summary, health, steps);
+    response.status(201).send(recipe);
+  } catch (error) {
+    next(error);
+  }
+});
+
+module.exports = router;

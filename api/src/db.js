@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Sequelize } = require('sequelize'),
+const { Sequelize, Op } = require('sequelize'),
   fs = require('fs'),
   path = require('path'),
   { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env,
@@ -44,5 +44,5 @@ Diets.belongsToMany(Recipes, { through: 'recipesDiets' })
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize // para importart la conexión { conn } = require('./db.js');
+  conn: sequelize, Op // para importart la conexión { conn } = require('./db.js');
 }
