@@ -1,10 +1,10 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize, DataTypes } = require('sequelize')
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "recipes",
+    'recipes',
     {
       id: {
         type: Sequelize.UUID,
@@ -13,9 +13,9 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Cannot be null",
-          },
-        },
+            msg: 'Cannot be null'
+          }
+        }
       },
 
       name: {
@@ -23,13 +23,13 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Cannot be null",
+            msg: 'Cannot be null'
           },
           len: {
             args: [3, 255],
-            msg: "minimum 3 letters",
-          },
-        },
+            msg: 'minimum 3 letters'
+          }
+        }
       },
 
       summary: {
@@ -37,19 +37,19 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Cannot be null",
-          },
-        },
+            msg: 'Cannot be null'
+          }
+        }
       },
       health: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.DECIMAL
       },
       steps: {
-        type: DataTypes.TEXT,
-      },
+        type: DataTypes.TEXT
+      }
     },
     {
-      timestamps: false,
+      timestamps: false
     }
-  );
-};
+  )
+}

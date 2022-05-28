@@ -4,7 +4,7 @@ const { getDiets } = require('../controllers/diets.js')
 
 router.get('/', async (_req, res, next) => {
   try {
-    let diets = await getDiets()
+    const diets = await getDiets()
     res.status(200).json(diets)
   } catch (error) {
     next(error)

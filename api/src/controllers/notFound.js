@@ -2,9 +2,9 @@ function notFound() {
   return {
     status: 404,
     body: {
-      error: "Not Found",
-    },
-  };
+      error: 'Not Found'
+    }
+  }
 }
 
-module.exports = { notFound };
+module.exports = { notFound }

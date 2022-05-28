@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -L --inspect index.js",
-    "test": "mocha -w ./tests/**/*.spec.js"
+    "test": "mocha -w ./tests/**/*.spec.js",
+    "lint": "eslint --fix .",
+    "format": "prettier --write ."
   },
   "author": "Henry",
   "license": "ISC",
@@ -28,8 +30,15 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^8.16.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-n": "^15.2.0",
+    "eslint-plugin-promise": "^6.0.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.6",
+    "prettier": "^2.6.2",
     "supertest": "^6.0.1",
     "supertest-session": "^4.1.0"
   }

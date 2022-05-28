@@ -1,8 +1,8 @@
-const express = require('express'),
-  cookieParser = require('cookie-parser'),
-  bodyParser = require('body-parser'),
-  morgan = require('morgan'),
-  routes = require('./routes/index.js')
+const express = require('express')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const routes = require('./routes/index.js')
 
 require('./db.js')
 
