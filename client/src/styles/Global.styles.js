@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 import OleoScriptSwashCapsBold from '../static/fonts/OleoScriptSwashCapsBold.ttf'
 import QuicksandMedium from '../static/fonts/QuicksandMedium.ttf'
 import QuicksandSemiBold from '../static/fonts/QuicksandSemiBold.ttf'
+import FrederickatheGreatRegular from '../static/fonts/FrederickatheGreatRegular.ttf'
 import { color } from './variables.styles'
 const Global = createGlobalStyle`
 
@@ -13,6 +14,11 @@ const Global = createGlobalStyle`
   font-family: 'QuicksandMedium';
   src: url(${QuicksandMedium}) format('truetype');
 }
+@font-face {
+  font-family: 'FrederickatheGreatRegular';
+  src: url(${FrederickatheGreatRegular}) format('truetype');
+}
+
 @font-face {
   font-family: 'QuicksandSemiBold';
   src: url(${QuicksandSemiBold}) format('truetype');
@@ -41,7 +47,7 @@ body {
   -webkit-font-feature-settings: 'liga';
   font-feature-settings: 'liga';
   min-height: 100vh;
-  background-color: ${color.yellow};
+  background-color: ${color.beige};
   font-family: 'QuicksandSemiBold', sans-serif;
 }
 
@@ -83,7 +89,7 @@ h1, h2, h3, h4, h5 {
 h1 {
   margin-top: 0;
   font-size: 11.089rem;
-  font-family: 'OleoScriptSwashCapsBold';
+  font-family: 'FrederickatheGreatRegular';
 }
 
 h2 {font-size: 6.854rem;}

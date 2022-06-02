@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { color } from '../../styles/variables.styles'
 
 const mixinSize = css`
@@ -20,7 +20,8 @@ const mixinFlex = (
 `
 
 export const Title = styled.h1`
-  color: ${color.black};
+  color: ${color.blue};
+  font-size: 9.5rem;
 `
 
 export const Container = styled.div`
@@ -35,8 +36,13 @@ export const LinkContainer = styled(motion.div)`
   cursor: pointer;
   width: 300px;
   height: 50px;
-  border: 2px solid ${color.red};
   border-radius: 1rem;
+  transition: background-color 0.2s ease-in;
+
+  &:hover {
+    transition: background-color 0.2s ease-in;
+    background-color: ${color.lightGreen};
+  }
 `
 
 export const GoToHome = styled(Link)`
@@ -45,17 +51,17 @@ export const GoToHome = styled(Link)`
 
 export const Text = styled.p`
   margin: 0;
-  color: ${color.black};
+  color: ${color.blue};
   font-size: 2rem;
   text-transform: uppercase;
 `
 
-export const ImgContainer = styled(motion.div)`
+export const ImgContainer = styled.div`
   ${mixinSize}
   ${mixinFlex()}
   overflow: hidden;
 `
-export const ImgLanding = styled.img`
+export const Img = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;

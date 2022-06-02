@@ -36,9 +36,9 @@ router.get('/', async (request, response, next) => {
 })
 
 router.post('/', async (request, response, next) => {
-  const { name, summary, health, steps } = request.body
+  const { name, summary, health, steps, diets} = request.body
   try {
-    const recipe = await createRecipe(name, summary, health, steps)
+    const recipe = await createRecipe(name, summary, health, steps, diets)
     response.status(201).send(recipe)
   } catch (error) {
     next(error)

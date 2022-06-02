@@ -4,11 +4,10 @@ import {
   LinkContainer,
   GoToHome,
   ImgContainer,
-  ImgLanding,
+  Img,
   Main,
   Text
 } from './landing.styles'
-
 import imgLanding from '../../static/img/imgLanding.png'
 
 export const Landing = () => {
@@ -16,13 +15,13 @@ export const Landing = () => {
     <>
       <Container>
         <ImgContainer>
-          <ImgLanding src={imgLanding} alt="landing" />
+          <Img src={imgLanding} alt="landing" />
         </ImgContainer>
         <Main>
-          <Title>Api Food</Title>
+          <Title>API Food</Title>
           <LinkContainer whileHover={{ scale: 1.1 }}>
             <GoToHome to="/home">
-              <Text>Home</Text>
+              <Text>explore recipes</Text>
             </GoToHome>
           </LinkContainer>
         </Main>

@@ -1,8 +1,8 @@
 export const color = {
-  black: '#201D1D',
+  blue: '#354259',
   white: '#FFFFFF',
-  yellow: '#E1E17C',
-  blue: '#7BE0D8',
-  green: '#89E07B',
-  red: '#E07B7B'
+  beige: '#ECE5C7',
+  green: '#8A9F95', //  #8A9F95
+  lightGreen: '#C2DED1',
+  lightBlue: '#A0BCC2'
 }
