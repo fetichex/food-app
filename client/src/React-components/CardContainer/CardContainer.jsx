@@ -21,7 +21,7 @@ export const CardContainer = () => {
             <Card
               key={recipe.id}
               id={recipe.id}
-              name={recipe.title}
+              name={recipe.title || recipe.name}
               image={recipe.image}
               diets={recipe.diets}
             />

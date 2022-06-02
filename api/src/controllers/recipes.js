@@ -6,7 +6,7 @@ const { URL_PATH, API_KEY } = process.env
 const UUID =
   /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/
 
-const createRecipe = async (name, summary, health, steps, diets, ) => {
+const createRecipe = async (name, summary, health, steps, diets) => {
   const recipe = await Recipes.create({
     name: name.toUpperCase(),
     summary,
@@ -34,14 +34,27 @@ const getRecipeByName = async (name) => {
       },
       include: {
         model: Diets,
-        attributes: ['id', 'name'],
+        attributes: ['name'],
         through: {
           attributes: []
         }
       }
     })
-    const result = dbRecipes
-      ? [...apiRecipes.data.results, ...dbRecipes]
+
+    const toDTO = (recipe) => {
+      return {
+        id: recipe.id,
+        name: recipe.name,
+        summary: recipe.summary,
+        health: recipe.health,
+        steps: recipe.steps,
+        diets: recipe.diets.map((diet) => diet.name)
+      }
+    }
+
+    const recipes = [...dbRecipes].map((recipe) => toDTO(recipe))
+    const result = recipes
+      ? [...apiRecipes.data.results, ...recipes]
       : apiRecipes.data.results
     return result.length !== 0 ? result : notFound()
   } catch (error) {

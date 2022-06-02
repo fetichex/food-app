@@ -1,9 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { getDiets } from '../../redux/thunks/thunk'
+import { getDiets, createRecipe } from '../../redux/thunks/thunk'
 import { selectDiets } from '../../redux/recipesSlice'
 import {
   Label,
+  Inputs,
+  DivHealth,
+  DivTitle,
+  LabelHealth,
   Health,
   Title,
   TextArea,
@@ -19,7 +23,7 @@ export const CreateRecipe = () => {
 
   const [selected, setSelected] = useState([])
 
-  const handleOnChange = (id) => {
+  const CheckOnChange = (id) => {
     const find = selected.indexOf(id)
 
     if (find > -1) {
@@ -28,11 +32,18 @@ export const CreateRecipe = () => {
       selected.push(id)
     }
     setSelected([...selected])
-    console.log(selected)
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const getValues = (e) => {
+    const values = {
+      name: e.target.title.value,
+      summary: e.target.summary.value,
+      health: e.target.health.value,
+      steps: e.target.steps.value,
+      diets: selected
+    }
+    console.log(values)
+    return values
   }
 
   useEffect(() => {
@@ -41,24 +52,36 @@ export const CreateRecipe = () => {
 
   return (
     <>
-      <Form>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault()
+          dispatch(createRecipe(getValues(e)))
+        }}>
         <Texts>
-          <div>
-            <Label htmlFor="title">title</Label>
-            <Title type="text" id="title" />
-            <Label htmlFor="health">health score</Label>
-            <Health type="number" id="health" />
-          </div>
+          <Inputs>
+            <DivTitle>
+              <Label htmlFor="title">title</Label>
+              <Title type="text" id="title" name="title" />
+            </DivTitle>
+            <DivHealth>
+              <LabelHealth htmlFor="health">
+                health
+                <br />
+                score
+              </LabelHealth>
+              <Health type="number" id="health" name="health" />
+            </DivHealth>
+          </Inputs>
           <Label htmlFor="summary">summary</Label>
-          <TextArea id="summary" />
-          <Label htmlFor="instructions">instructions</Label>
-          <TextArea id="instructions" />
+          <TextArea id="summary" name="summary" />
+          <Label htmlFor="steps">step to step</Label>
+          <TextArea id="steps" name="steps" />
         </Texts>
         <CheckBoxes>
           {diets.map((diet) => (
             <Label key={diet.id} htmlFor={diet.id}>
               <CheckBox
-                onChange={() => handleOnChange(diet.id)}
+                onChange={() => CheckOnChange(diet.id)}
                 selected={selected.includes(diet.id)}
                 key={diet.id}
                 type="checkbox"
@@ -68,7 +91,7 @@ export const CreateRecipe = () => {
             </Label>
           ))}
         </CheckBoxes>
-        <button onClick={() => handleSubmit}>Create</button>
+        <button type="submit">Create</button>
       </Form>
     </>
   )

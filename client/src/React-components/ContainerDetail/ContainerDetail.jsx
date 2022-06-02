@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux'
 // import { selectDetailRecipe } from '../../redux/detailSlice'
 import { DetailRecipes } from '../DetailRecipes/DetailRecipes'
+import { useDispatch } from 'react-redux'
 
 export const ContainerDetail = () => {
-  const detail = useSelector((state) => state.detail)
-
+  const dispatch = useDispatch()
+  
   console.log(detail.id)
   return (
     <>
@@ -12,7 +13,7 @@ export const ContainerDetail = () => {
         name={detail.title}
         id={detail.id}
         diets={detail.diets}
-        dish={detail.dishTypes}
+        dishs={detail.dishTypes}
         summary={detail.summary}
         steps={detail.steps}
         image={detail.image}
