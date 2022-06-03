@@ -1,3 +1,5 @@
+import { getDetail } from '../../redux/thunks/thunk'
+import { useDispatch } from 'react-redux'
 import {
   Container,
   Name,
@@ -9,9 +11,10 @@ import {
 } from './Card.styles'
 
 export const Card = ({ id, image, name, diets }) => {
+  const dispatch = useDispatch()
   return (
     <>
-      <Container to={`/home/${id}`}>
+      <Container to={`/home/${id}`} onClick={() => dispatch(getDetail(id))}>
         <Header>{<Image src={image} alt={name} />}</Header>
         <Info>
           <Name>{name}</Name>

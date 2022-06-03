@@ -1,4 +1,5 @@
 require('dotenv').config()
+const { toDTO } = require('../utils.js')
 const { Recipes, Diets, recipesDiets, Op } = require('../db.js')
 const { notFound } = require('./notFound.js')
 const axios = require('axios')
@@ -41,17 +42,6 @@ const getRecipeByName = async (name) => {
       }
     })
 
-    const toDTO = (recipe) => {
-      return {
-        id: recipe.id,
-        name: recipe.name,
-        summary: recipe.summary,
-        health: recipe.health,
-        steps: recipe.steps,
-        diets: recipe.diets.map((diet) => diet.name)
-      }
-    }
-
     const recipes = [...dbRecipes].map((recipe) => toDTO(recipe))
     const result = recipes
       ? [...apiRecipes.data.results, ...recipes]
@@ -70,13 +60,9 @@ const getRecipeById = async (id) => {
       id: recipes.id,
       health: recipes.health,
       name: recipes.name,
-      diets: recipes.diets
-        ? recipes.diets.map((diet) => {
-            return { id: diet.id, name: diet.name }
-          })
-        : [],
+      diets: recipes.diets ? recipes.diets.map((diet) => diet.name) : [],
       summary: recipes.summary,
-      steps: recipes.steps
+      steps: !isNaN(recipes.steps) ? null :[{step: recipes.steps}]
     }
     return recipe
   } else {

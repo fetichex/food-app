@@ -3,7 +3,6 @@ import {
   selectDetailIsLoading,
   selectDetailRecipe
 } from '../../redux/detailSlice'
-
 import {
   RecipeDetailContainer,
   Aside,
@@ -17,43 +16,42 @@ import {
 } from './DetailRecipes.styles'
 // import { recipe } from './mock'
 
-export const DetailRecipes = ({ name, image, summary, diets, dishs, steps }) => {
+export const DetailRecipes = () => {
   const isLoading = useSelector((state) => selectDetailIsLoading(state))
   const detail = useSelector((state) => selectDetailRecipe(state))
 
   if (isLoading === true) {
     return <h1>Loading...</h1>
   }
-  console.log(detail)
 
   return (
     <>
       <RecipeDetailContainer>
         <Header>
-          <h1>{name}</h1>
+          <h1>{detail.title || detail.name}</h1>
         </Header>
         <Aside>
-          <Image src={image} alt={name} />
+          <Image src={detail.image} alt={detail.name} />
           <Diets>
             <h3>Diet types:</h3>
-            {diets.map((diet, index) => (
+            {detail.diets.map((diet, index) => (
               <li key={index}>{diet}</li>
             ))}
           </Diets>
           <Dish>
             <h3>Dish types:</h3>
-            {dishs.map((dish, index) => (
+            {detail.dishTypes?.map((dish, index) => (
               <li key={index}>{dish}</li>
-            ))}
+            )) || <li>No dish types</li>}
           </Dish>
         </Aside>
         <Body>
-          <Summary>{summary}</Summary>
+          <Summary>{detail.summary}</Summary>
           <Steps>
             <h3>Steps to step:</h3>
-            {steps.map((step, index) => (
-              <li key={index}>{step.step}</li>
-            ))}
+            {detail.steps?.map((step, index) => (
+              <li key={index}>{step.step || 'No Steps'}</li>
+            )) || <li>No steps</li>}
           </Steps>
         </Body>
       </RecipeDetailContainer>

@@ -49,6 +49,7 @@ export const Summary = styled.div`
 
 export const Steps = styled.div`
   width: 100%;
+  min-height: 300px;
   padding: 20px;
   padding-left: 40px;
   background-color: ${color.lightGreen};

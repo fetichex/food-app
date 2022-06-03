@@ -4,7 +4,7 @@ import { Home } from './React-components/Home/Home'
 import { CreateRecipe } from './React-components/CreateRecipe/CreateRecipe'
 import { _404 } from './React-components/_404/_404'
 import Global from './styles/Global.styles'
-import { ContainerDetail } from './React-components/ContainerDetail/ContainerDetail'
+import { DetailRecipes } from './React-components/DetailRecipes/DetailRecipes'
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/home/:id" element={<ContainerDetail />} />
+          <Route path="/home/:id" element={<DetailRecipes />} />
           <Route path="/create" element={<CreateRecipe />} />
           <Route path="*" element={<_404 />} />
         </Routes>
