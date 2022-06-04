@@ -1,4 +1,4 @@
-import { getDetail } from '../../redux/thunks/thunk'
+import { getDetail } from '../../redux/utils/thunk'
 import { useDispatch } from 'react-redux'
 import {
   Container,
@@ -12,11 +12,20 @@ import {
 
 export const Card = ({ id, image, name, diets }) => {
   const dispatch = useDispatch()
+
   return (
     <>
       <Container to={`/home/${id}`} onClick={() => dispatch(getDetail(id))}>
         <Header>{<Image src={image} alt={name} />}</Header>
-        <Info>
+        <Info
+          initial={{ opacity: 0 }}
+          whileHover={{
+            opacity: 0.8,
+            transition: {
+              duration: 0.2,
+              ease: 'easeInOut'
+            }
+          }}>
           <Name>{name}</Name>
           <DietsContainer>
             <h3>Diets: </h3>

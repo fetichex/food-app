@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getDetail } from './thunks/thunk'
+import { getDetail } from './utils/thunk'
 
 const initialState = {
   detailRecipe: {},

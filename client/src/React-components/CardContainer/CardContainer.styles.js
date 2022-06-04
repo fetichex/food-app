@@ -7,5 +7,5 @@ export const Container = styled.div`
 
 export const Cards = styled.div`
   ${mixin.grid}
-  margin-top: 8px;
+  margin: 8px 0;
 `

@@ -4,7 +4,7 @@ import { BsSearch } from 'react-icons/bs'
 
 import { SearchBtn, Input, Search } from './SearchBar.styles'
 import { color } from '../../styles/variables.styles'
-import { findRecipes } from '../../redux/thunks/thunk'
+import { findRecipes } from '../../redux/utils/thunk'
 
 export const SearchBar = () => {
   const dispatch = useDispatch()
@@ -17,6 +17,13 @@ export const SearchBar = () => {
 
   const handleSubmit = () => {
     dispatch(findRecipes(value))
+    setValue('')
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit()
+    }
   }
 
   return (
@@ -25,12 +32,15 @@ export const SearchBar = () => {
         type="text"
         name="search"
         placeholder="SEARCH"
+        autoComplete="off"
+        value={value}
+        onKeyDown={handleKeyPress}
         onChange={handleChange}></Input>
       <SearchBtn
-        whileTap={{ backgroundColor: color.green }}
         onClick={() => {
           handleSubmit()
-        }}>
+        }}
+        whileTap={{ backgroundColor: color.green }}>
         <BsSearch />
       </SearchBtn>
     </Search>

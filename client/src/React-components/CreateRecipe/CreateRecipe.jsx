@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { getDiets, createRecipe } from '../../redux/thunks/thunk'
-import { selectDiets } from '../../redux/recipesSlice'
+import { getDiets, createRecipe } from '../../redux/utils/thunk'
+import { selectDiets } from '../../redux/dietsSlice'
 import {
   Label,
   Inputs,
@@ -32,6 +32,7 @@ export const CreateRecipe = () => {
       selected.push(id)
     }
     setSelected([...selected])
+    console.log(selected)
   }
 
   const getValues = (e) => {
@@ -42,7 +43,6 @@ export const CreateRecipe = () => {
       steps: e.target.steps.value,
       diets: selected
     }
-    console.log(values)
     return values
   }
 

@@ -12,10 +12,10 @@ function App() {
       <Global />
       <div className="App">
         <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/home/:id" element={<DetailRecipes />} />
-          <Route path="/create" element={<CreateRecipe />} />
+          <Route index element={<Landing />} />
+          <Route path="create" element={<CreateRecipe />} />
+          <Route path="home" element={<Home />} />
+          <Route exact path="home/:id" element={<DetailRecipes />} />
           <Route path="*" element={<_404 />} />
         </Routes>
       </div>

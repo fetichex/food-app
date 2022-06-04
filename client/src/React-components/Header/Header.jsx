@@ -1,6 +1,6 @@
-import { Section, Logo, Pagination } from './Header.styles'
+import { Section, Logo } from './Header.styles'
 import { SearchBar } from '../SearchBar/SearchBar'
-const pages = [1, 2, 3, 4, 5]
+import { Pagination } from '../Pagination/Pagination'
 
 export const Header = () => {
   return (
@@ -9,11 +9,7 @@ export const Header = () => {
         <h1>API Food</h1>
       </Logo>
       <SearchBar />
-      <Pagination>
-        {pages.map((page) => (
-          <button key={page}>{page}</button>
-        ))}
-      </Pagination>
+      <Pagination />
     </Section>
   )
 }

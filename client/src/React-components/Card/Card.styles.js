@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 export const Container = styled(Link)`
@@ -21,7 +22,7 @@ export const Header = styled.div`
   width: 100%;
   overflow: hidden;
 `
-export const Info = styled.div`
+export const Info = styled(motion.div)`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -31,14 +32,6 @@ export const Info = styled.div`
   height: 190px;
   border-radius: 5px;
   background: #333;
-  opacity: 0;
-  z-index: 1;
-  transition: opacity 0.2s;
-
-  &:hover {
-    transition: opacity 0.2s;
-    opacity: 0.8;
-  }
 `
 
 export const DietsContainer = styled.div`
@@ -66,13 +59,13 @@ export const DietsContainer = styled.div`
     align-items: flex-start;
     width: 100%;
     height: 100%;
+    opacity: 1;
   }
 `
 export const Name = styled.h2`
   padding: 0 5px;
   margin: 10px 0 0 0;
   color: #fff;
-  opacity: 1;
   text-transform: uppercase;
   text-align: center;
   font-size: 1.2rem;
@@ -83,7 +76,6 @@ export const Diets = styled.p`
   padding: 5px;
   margin: 0 5px;
   color: #fff;
-  opacity: 1;
   text-align: center;
   font-size: 0.8rem;
   border: 1px solid #fff;
@@ -92,5 +84,5 @@ export const Diets = styled.p`
 
 export const Image = styled.img`
   min-width: 100%;
-  object-fit: contain;
+  object-fit: cover;
 `

@@ -21,6 +21,29 @@ const createRecipe = async (name, summary, health, steps, diets) => {
   return recipe
 }
 
+const getAllRecipes = async () => {
+  try {
+    const apiRecipes = await axios.get(
+      `${URL_PATH}complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
+    )
+    const dbRecipes = await Recipes.findAll({
+      include: [
+        {
+          model: Diets,
+          attributes: ['name']
+        }
+      ]
+    })
+    const allRecipes = [...dbRecipes]
+      .map((recipe) => toDTO(recipe))
+      .concat(apiRecipes.data.results)
+
+    return allRecipes.length !== 0 ? allRecipes : notFound()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const getRecipeByName = async (name) => {
   const nameFormated = `%${name.toUpperCase().replace(' ', '% %')}%`
   try {
@@ -35,10 +58,7 @@ const getRecipeByName = async (name) => {
       },
       include: {
         model: Diets,
-        attributes: ['name'],
-        through: {
-          attributes: []
-        }
+        attributes: ['name']
       }
     })
 
@@ -46,6 +66,7 @@ const getRecipeByName = async (name) => {
     const result = recipes
       ? [...apiRecipes.data.results, ...recipes]
       : apiRecipes.data.results
+
     return result.length !== 0 ? result : notFound()
   } catch (error) {
     console.log(error)
@@ -62,7 +83,7 @@ const getRecipeById = async (id) => {
       name: recipes.name,
       diets: recipes.diets ? recipes.diets.map((diet) => diet.name) : [],
       summary: recipes.summary,
-      steps: !isNaN(recipes.steps) ? null :[{step: recipes.steps}]
+      steps: !isNaN(recipes.steps) ? null : [{ step: recipes.steps }]
     }
     return recipe
   } else {
@@ -90,4 +111,4 @@ const getRecipeById = async (id) => {
   }
 }
 
-module.exports = { getRecipeById, createRecipe, getRecipeByName }
+module.exports = { getAllRecipes, getRecipeById, getRecipeByName, createRecipe }

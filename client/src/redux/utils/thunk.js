@@ -1,10 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const API_KEY = '0cde6cf0b30847f693ee875ea6dac7fb'
-
-const URL_PATH = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&offset=0&number=9`
-
 export const createRecipe = createAsyncThunk(
   'recipes/createRecipe',
   async (recipe, thunkAPI) => {
@@ -21,8 +17,9 @@ export const getRecipes = createAsyncThunk(
   'recipes/getRecipes',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(URL_PATH)
-      return response.data.results
+      const response = await axios.get('http://localhost:3002/results' || 'http://localhost:3001/recipes')
+      console.log(response)
+      return response.data
     } catch (error) {
       return thunkAPI.rejectWithValue(error)
     }
