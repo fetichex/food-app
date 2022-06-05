@@ -14,7 +14,7 @@ export const Label = styled.label`
 `
 
 export const CheckBoxes = styled.div`
-  width: 100%;
+${mixin.flex}
+  width: 200px;
   height: 100%;
-  ${mixin.flex('column')}
 `

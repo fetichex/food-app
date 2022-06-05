@@ -15,7 +15,7 @@ export const Card = ({ id, image, name, diets }) => {
 
   return (
     <>
-      <Container to={`/home/${id}`} onClick={() => dispatch(getDetail(id))}>
+      <Container to={`/recipe/${id}`} onClick={() => dispatch(getDetail(id))}>
         <Header>{<Image src={image} alt={name} />}</Header>
         <Info
           initial={{ opacity: 0 }}

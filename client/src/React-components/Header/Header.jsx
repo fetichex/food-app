@@ -1,6 +1,5 @@
-import { Section, Logo } from './Header.styles'
+import { Section, Logo, LinkContainer, BtnCreate, Text } from './Header.styles'
 import { SearchBar } from '../SearchBar/SearchBar'
-import { Pagination } from '../Pagination/Pagination'
 
 export const Header = () => {
   return (
@@ -9,7 +8,11 @@ export const Header = () => {
         <h1>API Food</h1>
       </Logo>
       <SearchBar />
-      <Pagination />
+      <LinkContainer whileHover={{ scale: 1.1 }}>
+        <BtnCreate to={'/create'}>
+          <Text>Create Recipe</Text>
+        </BtnCreate>
+      </LinkContainer>
     </Section>
   )
 }

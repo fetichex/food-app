@@ -3,8 +3,9 @@ import { getRecipes, findRecipes } from './utils/thunk'
 
 const initialState = {
   recipes: [],
+  filteredRecipes: [],
   isLoading: false,
-  isAscen: false
+  rejected: false
 }
 
 const recipesSlice = createSlice({
@@ -12,8 +13,7 @@ const recipesSlice = createSlice({
   initialState,
   reducers: {
     setAscen: (state) => {
-      state.isAscen = true
-      state.recipes = state.recipes.sort((a, b) => {
+      state.filteredRecipes = state.filteredRecipes.sort((a, b) => {
         const name1 = !a.title ? a.name : a.title
         const name2 = !b.title ? b.name : b.title
         if (name1 < name2) {
@@ -26,11 +26,9 @@ const recipesSlice = createSlice({
       })
     },
     setDescen: (state) => {
-      state.isAscen = false
-      state.recipes = state.recipes.sort((a, b) => {
+      state.filteredRecipes = state.filteredRecipes.sort((a, b) => {
         const name1 = !a.title ? a.name : a.title
         const name2 = !b.title ? b.name : b.title
-
         if (name1 > name2) {
           return -1
         }
@@ -39,6 +37,19 @@ const recipesSlice = createSlice({
         }
         return 0
       })
+    },
+    setRecipes: (state, action) => {
+      state.recipes = action.payload
+    },
+    setFilteredRecipes: (state, action) => {
+      const totalRecipes = state.recipes
+      const totalDiets = action.payload
+      const filterRecipes = totalRecipes.filter((recipe) => {
+        return totalDiets.every((diet) => {
+          return recipe.diets.includes(diet)
+        })
+      })
+      state.filteredRecipes = filterRecipes || totalRecipes
     }
   },
   extraReducers: {
@@ -48,6 +59,7 @@ const recipesSlice = createSlice({
     [getRecipes.fulfilled]: (state, action) => {
       state.isLoading = false
       state.recipes = action.payload
+      state.filteredRecipes = action.payload
     },
     [getRecipes.rejected]: (state) => {
       state.isLoading = false
@@ -58,18 +70,19 @@ const recipesSlice = createSlice({
     [findRecipes.fulfilled]: (state, action) => {
       state.isLoading = false
       state.recipes = action.payload
-      console.log('findRecipes.fulfilled', state.recipes)
     },
     [findRecipes.rejected]: (state) => {
       state.isLoading = false
+      state.rejected = true
       state.recipes = []
     }
   }
 })
 
 export const selectRecipes = (state) => state.recipes.recipes
+export const getGecipesFilter = (state) => state.recipes.filteredRecipes
 export const selectIsLoading = (state) => state.recipes.isLoading
 
-export const { setAscen, setDescen } = recipesSlice.actions
+export const { setAscen, setDescen, setRecipes, setFilteredRecipes } = recipesSlice.actions
 
 export default recipesSlice.reducer

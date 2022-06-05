@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import mixin from '../../styles/mixins'
 import { color } from '../../styles/variables.styles'
 
@@ -18,4 +20,24 @@ export const Logo = styled.div`
     font-size: 3rem;
     color: ${color.beige};
   }
+`
+export const LinkContainer = styled(motion.div)`
+  ${mixin.flex}
+  cursor: pointer;
+  width: 200px;
+  height: 50px;
+  border-radius: 1rem;
+  background-color: ${color.lightGreen};
+`
+
+export const BtnCreate = styled(Link)`
+  ${mixin.flex}
+  width: 200px;
+  height: 40px;
+`
+export const Text = styled.p`
+  margin: 0;
+  color: ${color.blue};
+  font-size: 1.1rem;
+  text-transform: uppercase;
 `

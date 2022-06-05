@@ -1,27 +1,10 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setAscen, setDescen } from '../../redux/recipesSlice'
-import { CheckBoxes, CheckBox, Label } from './Controls.styles'
+import { CheckBoxes, CheckBox, Label } from './Ordener.styles'
 
-export const Controls = () => {
+const Ordener = () => {
   const dispatch = useDispatch()
-  /*   const initialState = {
-    checkBoxOne: false,
-    checkBoxTwo: false
-  }
-
-  const [state, setState] = useState(initialState)
-
-  const toggleCheck = (event) => {
-    const { name } = event.target
-    const newState = { ...state }
-    setState({
-      newState,
-      [name]: !newState[name]
-    })
-    console.log(name)
-  } */
-
   const [checked, setChecked] = useState(false)
   const [checked1, setChecked1] = useState(false)
 
@@ -66,3 +49,5 @@ export const Controls = () => {
     </>
   )
 }
+
+export default Ordener

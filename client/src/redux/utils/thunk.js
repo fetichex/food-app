@@ -17,8 +17,9 @@ export const getRecipes = createAsyncThunk(
   'recipes/getRecipes',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('http://localhost:3002/results' || 'http://localhost:3001/recipes')
-      console.log(response)
+      const response = await axios.get(
+        'http://localhost:3002/results' /* || 'http://localhost:3001/recipes' */
+      )
       return response.data
     } catch (error) {
       return thunkAPI.rejectWithValue(error)
@@ -31,7 +32,7 @@ export const findRecipes = createAsyncThunk(
   async (query, thunkAPI) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/recipes?name=${query}`
+        `http://localhost:3001/recipes/search?name=${query}`
       )
       return response.data
     } catch (error) {
@@ -63,6 +64,3 @@ export const getDiets = createAsyncThunk(
     }
   }
 )
-
-/* 'https://api.spoonacular.com/recipes/complexSearch?apiKey=0cde6cf0b30847f693ee875ea6dac7fb&addRecipeInformation=true&offset=0&number=9' */
-/* 'https://api.spoonacular.com/recipes/complexSearch?apiKey=ed3ea45553fa4e2297cd5a6594f94408&addRecipeInformation=true&offset=18&number=9' */ //  'http://localhost:3002/results'

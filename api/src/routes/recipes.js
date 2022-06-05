@@ -10,11 +10,26 @@ const {
 
 router.get('/', async (_, response, next) => {
   try {
+    console.log('getAllRecipes')
     const recipes = await getAllRecipes()
     if (recipes.status === 404) {
       response.status(404).send(recipes)
     }
     response.status(200).send(recipes)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/search', async (request, response, next) => {
+  const { name } = request.query
+  try {
+    const recipes = await getRecipeByName(name)
+    if (recipes.status === 404) {
+      response.status(404).send(recipes)
+    }
+    response.status(200).send(recipes)
+    console.log(recipes)
   } catch (error) {
     next(error)
   }
@@ -28,19 +43,6 @@ router.get('/:idRecipe', async (request, response, next) => {
       response.status(404).send(recipe)
     }
     response.status(200).send(recipe)
-  } catch (error) {
-    next(error)
-  }
-})
-
-router.get('/', async (request, response, next) => {
-  const { name } = request.query
-  try {
-    const recipes = await getRecipeByName(name)
-    if (recipes.status === 404) {
-      response.status(404).send(recipes)
-    }
-    response.status(200).send(recipes)
   } catch (error) {
     next(error)
   }

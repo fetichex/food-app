@@ -1,56 +1,46 @@
-import { useState, useEffect } from 'react'
-// import { useSelector } from 'react-redux'
-// import { selectRecipes } from '../../redux/recipesSlice'
-import { MdOutlineArrowBackIosNew } from 'react-icons/md'
-import { Container, Page } from './Pagination.styles'
+import {
+  MdOutlineArrowBackIosNew,
+  MdOutlineArrowForwardIos
+} from 'react-icons/md'
+import { Paginator } from './Pagination.styles'
 
-export const Pagination = () => {
-  // const recipes = useSelector((state) => selectRecipes(state))
-
-  const pages = 10
-  const numberOfPages = []
-  for (let i = 1; i <= pages; i++) {
-    numberOfPages.push(i)
+export const Pagination = ({
+  recipesPagination,
+  allRecipes,
+  pagination,
+  currentPage
+}) => {
+  const pageNumbers = []
+  for (let i = 0; i < Math.ceil(allRecipes / recipesPagination); i++) {
+    pageNumbers.push(i + 1)
   }
 
-  const [currentButton, setCurrentButton] = useState(1)
-  const [arrOfCurrentButtons, setArrOfCurrentButtons] = useState([])
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      pagination(currentPage - 1)
+    }
+  }
 
-  useEffect(() => {
-    let tempNumberOfPages = [...numberOfPages]
-    tempNumberOfPages = tempNumberOfPages.slice(0, 4)
-    setArrOfCurrentButtons(tempNumberOfPages)
-  }, [currentButton])
+  const handleNext = () => {
+    console.log(currentPage, pageNumbers.length)
+    if (currentPage < pageNumbers.length) {
+      pagination(currentPage + 1)
+    }
+  }
+
   return (
-    <>
-      <Container>
-        <Page
-          to={''}
-          onClick={() =>
-            setCurrentButton((prev) => (prev === 1 ? prev : prev - 1))
-          }>
-          <MdOutlineArrowBackIosNew />
-        </Page>
-        {arrOfCurrentButtons.map((page) => (
-          <Page
-            key={page}
-            active={currentButton === page ? 'active' : ''}
-            onClick={setCurrentButton(page)}
-            to={''}>
-            {page}
-          </Page>
-        ))}
-        <Page
-          to={''}
-          direction={'left'}
-          onClick={() =>
-            setCurrentButton((prev) =>
-              prev === numberOfPages.length ? prev : prev + 1
-            )
-          }>
-          <MdOutlineArrowBackIosNew />
-        </Page>
-      </Container>
-    </>
+    <Paginator>
+      <button onClick={handlePrevious}>
+        <MdOutlineArrowBackIosNew />
+      </button>
+      {pageNumbers?.map((number) => (
+        <li key={number}>
+          <button onClick={() => pagination(number)}>{number}</button>
+        </li>
+      ))}
+      <button onClick={handleNext}>
+        <MdOutlineArrowForwardIos />
+      </button>
+    </Paginator>
   )
 }
