@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { getDiets, createRecipe } from '../../redux/utils/thunk'
 import { selectDiets } from '../../redux/dietsSlice'
+
 import {
   Label,
   Inputs,
@@ -14,14 +15,39 @@ import {
   Form,
   CheckBox,
   Texts,
-  CheckBoxes
+  CheckBoxes,
+  Message,
+  MessageContainer,
+  Text,
+  Buttons,
+  Button,
+  LinkContainer,
+  BtnCancel,
+  IconWarning
 } from './CreateRecipe.styles'
 
 export const CreateRecipe = () => {
   const dispatch = useDispatch()
   const diets = useSelector((state) => selectDiets(state))
-
   const [selected, setSelected] = useState([])
+  const [validate, setValidate] = useState('')
+
+  const regexValidate = (e) => {
+    switch (e.target.name) {
+      case 'title':
+        !e.target.value.match(/^[a-zA-ZÀ-ÿ\s]{3,255}$/)
+          ? setValidate('block')
+          : setValidate('')
+        break
+      case 'summary':
+        !e.target.value.match(/^[a.0-z-A-Z/,À-ÿ\s]{10,255}$/)
+          ? setValidate('block')
+          : setValidate('')
+        break
+      default:
+        setValidate('')
+    }
+  }
 
   const CheckOnChange = (id) => {
     const find = selected.indexOf(id)
@@ -32,7 +58,6 @@ export const CreateRecipe = () => {
       selected.push(id)
     }
     setSelected([...selected])
-    console.log(selected)
   }
 
   const getValues = (e) => {
@@ -61,7 +86,12 @@ export const CreateRecipe = () => {
           <Inputs>
             <DivTitle>
               <Label htmlFor="title">title</Label>
-              <Title type="text" id="title" name="title" />
+              <Title
+                onBlur={regexValidate}
+                type="text"
+                id="title"
+                name="title"
+              />
             </DivTitle>
             <DivHealth>
               <LabelHealth htmlFor="health">
@@ -72,26 +102,40 @@ export const CreateRecipe = () => {
               <Health type="number" id="health" name="health" />
             </DivHealth>
           </Inputs>
+          <MessageContainer display={validate}>
+            <IconWarning />
+            <Message>Only letters and spaces, min 3, max 255</Message>
+          </MessageContainer>
           <Label htmlFor="summary">summary</Label>
-          <TextArea id="summary" name="summary" />
+          <TextArea id="summary" name="summary" onBlur={regexValidate} />
           <Label htmlFor="steps">step to step</Label>
           <TextArea id="steps" name="steps" />
         </Texts>
-        <CheckBoxes>
-          {diets.map((diet) => (
-            <Label key={diet.id} htmlFor={diet.id}>
-              <CheckBox
-                onChange={() => CheckOnChange(diet.id)}
-                selected={selected.includes(diet.id)}
-                key={diet.id}
-                type="checkbox"
-                id={diet.id}
-              />
-              {diet.name}
-            </Label>
-          ))}
-        </CheckBoxes>
-        <button type="submit">Create</button>
+        <div>
+          <Label htmlFor="diets">diets</Label>
+          <CheckBoxes>
+            {diets.map((diet) => (
+              <Label key={diet.id} htmlFor={diet.id}>
+                <CheckBox
+                  onChange={() => CheckOnChange(diet.id)}
+                  selected={selected.includes(diet.id)}
+                  key={diet.id}
+                  type="checkbox"
+                  id={diet.id}
+                />
+                {diet.name}
+              </Label>
+            ))}
+          </CheckBoxes>
+        </div>
+        <Buttons>
+          <Button type="submit">Create</Button>
+          <LinkContainer>
+            <BtnCancel to={'/home'}>
+              <Text>Cancel</Text>
+            </BtnCancel>
+          </LinkContainer>
+        </Buttons>
       </Form>
     </>
   )

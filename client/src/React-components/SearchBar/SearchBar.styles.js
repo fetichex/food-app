@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import { color } from '../../styles/variables.styles'
+import color from '../../styles/variables.styles'
 
 export const Search = styled.div`
   display: flex;

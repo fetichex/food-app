@@ -1,4 +1,4 @@
-export const color = {
+const color = {
   blue: '#354259',
   white: '#FFFFFF',
   beige: '#ECE5C7',
@@ -6,3 +6,5 @@ export const color = {
   lightGreen: '#C2DED1',
   lightBlue: '#A0BCC2'
 }
+
+export default color

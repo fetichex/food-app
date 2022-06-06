@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 // import mixin from '../../styles/mixins'
-import { color } from '../../styles/variables.styles'
+import color from '../../styles/variables.styles'
 
 export const RecipeDetailContainer = styled.article`
   width: 90%;

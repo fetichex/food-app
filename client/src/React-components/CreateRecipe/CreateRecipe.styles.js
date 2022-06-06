@@ -1,32 +1,62 @@
 import styled from 'styled-components'
-import { color } from '../../styles/variables.styles'
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import color from '../../styles/variables.styles'
+import { IoAlertCircleOutline } from 'react-icons/io5'
+import mixin from '../../styles/mixins'
 
+export const Inputs = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+`
 export const Label = styled.label`
   font-size: 1.1rem;
   text-transform: capitalize;
 `
 export const DivTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  ${mixin.flex('column', 'flex-start', 'center')}
+`
+export const MessageContainer = styled.div`
+  ${mixin.flex}
+  padding: .3rem;
+  width: auto;
+  height: 40px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid tomato;
+  display: ${(props) => (props.display ? 'block' : 'none')};
+`
+export const Message = styled.small`
+  margin: 0;
+  font-size: 1rem;
+  color: tomato;
+`
+export const IconWarning = styled(IoAlertCircleOutline)`
+  color: tomato;
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
 `
 
 export const Title = styled.input`
-  padding: 0.5rem;
-  height: 30px;
+  padding: 0.2rem;
+  height: 40px;
   width: 320px;
-  border: none;
   font-size: 1.1rem;
+  outline: none;
+  border: 2px solid transparent;
+  border-radius: 5px;
+
+  &:focus {
+    border: 2px solid ${color.lightBlue};
+  }
 `
 
 export const DivHealth = styled.div`
   width: 100px;
   margin-left: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  ${mixin.flex('row', 'center', 'space-between')}
 `
 
 export const LabelHealth = styled(Label)`
@@ -37,41 +67,40 @@ export const Labeldiv = styled.div`
   width: 100px;
 `
 export const Health = styled.input`
-  height: 30px;
+  padding: 0.3rem;
   width: 50px;
+  height: 40px;
   font-size: 1.1rem;
   border: none;
+  text-align: center;
+  border-radius: 5px;
+  outline: none;
+
+  &:focus {
+    border: 2px solid ${color.lightBlue};
+  }
 `
 
 export const TextArea = styled.textarea`
   padding: 0.5rem;
   width: 450px;
-  height: 150px;
-  font-size: 1.1rem;
+  height: 100px;
   border: none;
   resize: none;
+  outline: none;
+  border-radius: 5px;
+
+  &:focus {
+    border: 2px solid ${color.lightBlue};
+  }
 `
 
 export const Form = styled.form`
-  margin: 20px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 70%;
-  height: 100vh;
-  font-size: 1px;
-
-  button {
-    width: 150px;
-    height: 50px;
-    border-radius: 5px;
-    background-color: ${color.blue};
-    border: none;
-    color: ${color.white};
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
+  margin-inline: auto;
+  ${mixin.flex('column')}
+  width: 30%;
+  height: 100%;
+  row-gap: 1rem;
 `
 export const CheckBox = styled.input`
   margin-right: 5px;
@@ -80,23 +109,53 @@ export const CheckBox = styled.input`
 `
 
 export const CheckBoxes = styled.div`
-  margin-top: 20px;
+  ${mixin.flex('column', 'flex-start', 'space-evenly')}
+  padding-left: 10px;
   width: 450px;
   height: 140px;
-  display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
 `
 
 export const Texts = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  ${mixin.flex('column', 'flex-start', 'center')}
+`
+export const Buttons = styled.div`
+  ${mixin.flex('column', 'center', 'space-between')}
+  width: 100%;
+  height: 100px;
+  margin-top: 20px;
+`
+export const Button = styled(motion.div)`
+  ${mixin.flex}
+  width: 100%;
+  height: 50px;
+  border-radius: 0.5rem;
+  background-color: ${color.blue};
+  border: none;
+  color: ${color.white};
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  cursor: pointer;
 `
 
-export const Inputs = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+export const LinkContainer = styled(motion.div)`
+  ${mixin.flex}
+  cursor: pointer;
+  width: 30%;
+  height: 30px;
+  border: none;
+  border-radius: 0.5rem;
+`
+
+export const BtnCancel = styled(Link)`
+  ${mixin.flex}
+  width: 200px;
+  height: 30px;
+`
+export const Text = styled.p`
+  margin: 0;
+  color: ${color.blue};
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  text-decoration: underline;
 `

@@ -1,4 +1,7 @@
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { getDetail } from '../../redux/utils/thunk'
 import {
   selectDetailIsLoading,
   selectDetailRecipe
@@ -17,10 +20,16 @@ import {
 // import { recipe } from './mock'
 
 export const DetailRecipes = () => {
-  const isLoading = useSelector((state) => selectDetailIsLoading(state))
-  const detail = useSelector((state) => selectDetailRecipe(state))
+  const detail = useSelector(selectDetailRecipe)
+  const isLoading = useSelector(selectDetailIsLoading)
+  const { id } = useParams()
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getDetail(id))
+    console.log(detail)
+  }, [dispatch, id])
 
-  if (isLoading === true) {
+  if (isLoading) {
     return <h1>Loading...</h1>
   }
 
@@ -34,9 +43,9 @@ export const DetailRecipes = () => {
           <Image src={detail.image} alt={detail.name} />
           <Diets>
             <h3>Diet types:</h3>
-            {detail.diets.map((diet, index) => (
+            {detail.diets?.map((diet, index) => (
               <li key={index}>{diet}</li>
-            ))}
+            )) || <li>No diets types</li>}
           </Diets>
           <Dish>
             <h3>Dish types:</h3>

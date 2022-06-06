@@ -98,7 +98,7 @@ const getRecipeById = async (id) => {
         image: recipes.data.image,
         diets: recipes.data.diets,
         dishTypes: recipes.data.dishTypes,
-        summary: recipes.data.summary,
+        summary: recipes.data.summary.replace(/<[^>]*>?/g, ''),
         steps:
           recipes.data.analyzedInstructions.length !== 0
             ? recipes.data.analyzedInstructions[0].steps

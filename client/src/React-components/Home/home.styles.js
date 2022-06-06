@@ -8,9 +8,9 @@ export const GridLayout = styled.section`
 
   grid-template-areas:
     'header header header header'
-    '. cards cards cards'
-    '. cards cards cards'
-    '. cards cards cards';
+    'controls cards cards cards'
+    'controls cards cards cards'
+    'controls cards cards cards';
 
   min-height: 100vh;
 `
@@ -32,4 +32,9 @@ export const Cards = styled.div`
 
 export const Controls = styled.div`
   ${mixin.flex('column')}
+  grid-area: controls;
+  div {
+    width: 100%;
+    
+  }
 `

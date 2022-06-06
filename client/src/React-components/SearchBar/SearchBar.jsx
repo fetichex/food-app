@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { BsSearch } from 'react-icons/bs'
 
 import { SearchBtn, Input, Search } from './SearchBar.styles'
-import { color } from '../../styles/variables.styles'
 import { findRecipes } from '../../redux/utils/thunk'
 
 export const SearchBar = () => {
@@ -40,8 +39,7 @@ export const SearchBar = () => {
       <SearchBtn
         onClick={() => {
           handleSubmit()
-        }}
-        whileTap={{ backgroundColor: color.green }}>
+        }}>
         <BsSearch />
       </SearchBtn>
     </Search>

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { color } from '../../styles/variables.styles'
+import color from '../../styles/variables.styles'
 
 const mixinSize = css`
   width: 100%;

@@ -38,8 +38,31 @@ const recipesSlice = createSlice({
         return 0
       })
     },
-    setRecipes: (state, action) => {
-      state.recipes = action.payload
+    setMinorToMajor: (state) => {
+      state.filteredRecipes = state.filteredRecipes.sort((a, b) => {
+        const score1 = a.healthScore
+        const score2 = b.healthScore
+        if (score1 < score2) {
+          return -1
+        }
+        if (score1 > score2) {
+          return 1
+        }
+        return 0
+      })
+    },
+    setMajorToMinor: (state) => {
+      state.filteredRecipes = state.filteredRecipes.sort((a, b) => {
+        const score1 = a.healthScore
+        const score2 = b.healthScore
+        if (score1 > score2) {
+          return -1
+        }
+        if (score1 < score2) {
+          return 1
+        }
+        return 0
+      })
     },
     setFilteredRecipes: (state, action) => {
       const totalRecipes = state.recipes
@@ -83,6 +106,7 @@ export const selectRecipes = (state) => state.recipes.recipes
 export const getGecipesFilter = (state) => state.recipes.filteredRecipes
 export const selectIsLoading = (state) => state.recipes.isLoading
 
-export const { setAscen, setDescen, setRecipes, setFilteredRecipes } = recipesSlice.actions
+export const { setAscen, setDescen, setRecipes, setMinorToMajor, setMajorToMinor, setFilteredRecipes } =
+  recipesSlice.actions
 
 export default recipesSlice.reducer

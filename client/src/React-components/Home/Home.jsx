@@ -54,8 +54,14 @@ export const Home = () => {
           </div>
           <CardsContainer>
             <Controls>
-              <Ordener />
-              <Filter />
+              <div>
+                <p>Order by</p>
+                <Ordener />
+              </div>
+              <div>
+                <p>Filter by</p>
+                <Filter />
+              </div>
             </Controls>
             <Cards>
               {currentRecipes.map((recipe) => (

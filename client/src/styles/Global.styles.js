@@ -3,7 +3,7 @@ import OleoScriptSwashCapsBold from '../static/fonts/OleoScriptSwashCapsBold.ttf
 import QuicksandMedium from '../static/fonts/QuicksandMedium.ttf'
 import QuicksandSemiBold from '../static/fonts/QuicksandSemiBold.ttf'
 import FrederickatheGreatRegular from '../static/fonts/FrederickatheGreatRegular.ttf'
-import { color } from './variables.styles'
+import color from './variables.styles'
 const Global = createGlobalStyle`
 
 @font-face {
@@ -22,6 +22,15 @@ const Global = createGlobalStyle`
 @font-face {
   font-family: 'QuicksandSemiBold';
   src: url(${QuicksandSemiBold}) format('truetype');
+}
+
+input[type="number"]::-webkit-outer-spin-button, 
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 *, *::before, *::after {

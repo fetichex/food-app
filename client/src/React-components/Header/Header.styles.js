@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import mixin from '../../styles/mixins'
-import { color } from '../../styles/variables.styles'
+import color from '../../styles/variables.styles'
 
 export const Section = styled.div`
   ${mixin.flex('row', 'center', 'space-around')}
@@ -38,6 +38,5 @@ export const BtnCreate = styled(Link)`
 export const Text = styled.p`
   margin: 0;
   color: ${color.blue};
-  font-size: 1.1rem;
   text-transform: uppercase;
 `
