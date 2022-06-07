@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getRecipes, findRecipes } from './utils/thunk'
+import { getRecipes, findRecipes, createRecipe } from './utils/thunk'
 
 const initialState = {
   recipes: [],
@@ -72,7 +72,12 @@ const recipesSlice = createSlice({
           return recipe.diets.includes(diet)
         })
       })
-      state.filteredRecipes = filterRecipes || totalRecipes
+      if (filterRecipes.length === 0) {
+        state.rejected = true
+      } else {
+        state.filteredRecipes = filterRecipes
+        state.rejected = false
+      }
     }
   },
   extraReducers: {
@@ -86,27 +91,49 @@ const recipesSlice = createSlice({
     },
     [getRecipes.rejected]: (state) => {
       state.isLoading = false
+      state.rejected = true
     },
     [findRecipes.pending]: (state) => {
       state.isLoading = true
     },
     [findRecipes.fulfilled]: (state, action) => {
       state.isLoading = false
+      state.rejected = false
       state.recipes = action.payload
+      state.filteredRecipes = action.payload
     },
     [findRecipes.rejected]: (state) => {
       state.isLoading = false
       state.rejected = true
       state.recipes = []
+      state.filteredRecipes = []
+    },
+    [createRecipe.pending]: (state) => {
+      state.isLoading = true
+    },
+    [createRecipe.fulfilled]: (state, action) => {
+      state.isLoading = false
+      state.rejected = false
+    },
+    [createRecipe.rejected]: (state) => {
+      state.isLoading = false
+      state.rejected = true
     }
   }
 })
 
 export const selectRecipes = (state) => state.recipes.recipes
-export const getGecipesFilter = (state) => state.recipes.filteredRecipes
+export const getRecipesFilter = (state) => state.recipes.filteredRecipes
 export const selectIsLoading = (state) => state.recipes.isLoading
+export const selectRejected = (state) => state.recipes.rejected
 
-export const { setAscen, setDescen, setRecipes, setMinorToMajor, setMajorToMinor, setFilteredRecipes } =
-  recipesSlice.actions
+export const {
+  setAscen,
+  setDescen,
+  setRecipes,
+  setMinorToMajor,
+  setMajorToMinor,
+  setFilteredRecipes
+} = recipesSlice.actions
 
 export default recipesSlice.reducer

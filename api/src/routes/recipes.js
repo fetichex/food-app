@@ -49,9 +49,9 @@ router.get('/:idRecipe', async (request, response, next) => {
 })
 
 router.post('/', async (request, response, next) => {
-  const { name, summary, health, steps, diets } = request.body
+  const { name, summary, healthScore, steps, diets } = request.body
   try {
-    const recipe = await createRecipe(name, summary, health, steps, diets)
+    const recipe = await createRecipe(name, summary, healthScore, steps, diets)
     response.status(201).send(recipe)
   } catch (error) {
     next(error)

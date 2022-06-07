@@ -3,7 +3,7 @@ const toDTO = (recipe) => {
     id: recipe.id,
     name: recipe.name,
     summary: recipe.summary,
-    health: recipe.health,
+    healthScore: recipe.healthScore,
     steps: recipe.steps,
     diets: recipe.diets.map((diet) => diet.name)
   }

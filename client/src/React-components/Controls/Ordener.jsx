@@ -74,7 +74,6 @@ const Ordener = () => {
         </section>
         <section>
           <div>
-            {' '}
             <CheckBox
               id="0-100"
               name="0-100"

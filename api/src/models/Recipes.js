@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
           }
         }
       },
-      health: {
+      healthScore: {
         type: DataTypes.DECIMAL
       },
       steps: {

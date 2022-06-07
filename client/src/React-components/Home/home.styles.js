@@ -23,10 +23,13 @@ export const AreaCards = styled.section`
   height: 100%;
 `
 export const CardsContainer = styled.div`
-  ${mixin.flex}
+  ${mixin.flex('row', 'center', 'space-between')}
+  padding-inline: 40px;
 `
 export const Cards = styled.div`
   ${mixin.grid}
+  min-width: 71%;
+  height: 100%;
   margin: 8px 0;
 `
 
@@ -35,6 +38,5 @@ export const Controls = styled.div`
   grid-area: controls;
   div {
     width: 100%;
-    
   }
 `

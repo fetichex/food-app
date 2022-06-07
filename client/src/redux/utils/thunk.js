@@ -18,7 +18,7 @@ export const getRecipes = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(
-        'http://localhost:3002/results' /* || 'http://localhost:3001/recipes' */
+        /* 'http://localhost:3002/results' || */ 'http://localhost:3001/recipes'
       )
       return response.data
     } catch (error) {

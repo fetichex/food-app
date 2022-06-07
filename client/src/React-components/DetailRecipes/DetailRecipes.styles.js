@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-// import mixin from '../../styles/mixins'
+import mixin from '../../styles/mixins'
 import color from '../../styles/variables.styles'
 
 export const RecipeDetailContainer = styled.article`
@@ -29,11 +29,8 @@ export const Header = styled.header`
 export const Body = styled.section`
   color: black;
   grid-column: span 2;
-  display: flex;
   gap: 20px;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  ${mixin.flex('column', 'center', 'space-between')}
 
   h3 {
     font-size: 1.5rem;
@@ -42,6 +39,7 @@ export const Body = styled.section`
 
 export const Summary = styled.div`
   width: 100%;
+  min-height: 10%;
   padding: 20px;
   background-color: ${color.lightBlue};
   border-radius: 10px;
@@ -80,6 +78,21 @@ export const Image = styled.img`
   width: 100%;
   height: auto;
   object-fit: contain;
+`
+
+export const HealthScore = styled.div`
+  ${mixin.flex('row', 'center', 'flex-start')}
+  width: 90%;
+  padding: 20px;
+  gap: 20px;
+  h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin: 0;
+  }
 `
 
 export const Diets = styled.div`

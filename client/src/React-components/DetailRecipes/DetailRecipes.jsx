@@ -15,6 +15,7 @@ import {
   Header,
   Body,
   Image,
+  HealthScore,
   Summary
 } from './DetailRecipes.styles'
 // import { recipe } from './mock'
@@ -41,6 +42,10 @@ export const DetailRecipes = () => {
         </Header>
         <Aside>
           <Image src={detail.image} alt={detail.name} />
+          <HealthScore>
+            <h3>Healt score:</h3>
+            <span>{detail.healthScore}</span>
+          </HealthScore>
           <Diets>
             <h3>Diet types:</h3>
             {detail.diets?.map((diet, index) => (

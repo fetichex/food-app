@@ -45,7 +45,8 @@ export const Title = styled.input`
   width: 320px;
   font-size: 1.1rem;
   outline: none;
-  border: 2px solid transparent;
+  border: ${(props) =>
+    props.error ? '2px solid tomato' : '2px solid transparent'};
   border-radius: 5px;
 
   &:focus {
@@ -70,7 +71,7 @@ export const Health = styled.input`
   padding: 0.3rem;
   width: 50px;
   height: 40px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   border: none;
   text-align: center;
   border-radius: 5px;
@@ -89,9 +90,11 @@ export const TextArea = styled.textarea`
   resize: none;
   outline: none;
   border-radius: 5px;
+  border: ${(props) =>
+    props.error ? '2px solid tomato' : '2px solid transparent'};
 
   &:focus {
-    border: 2px solid ${color.lightBlue};
+    border: 2px solid ${color.blue};
   }
 `
 
@@ -125,8 +128,9 @@ export const Buttons = styled.div`
   height: 100px;
   margin-top: 20px;
 `
-export const Button = styled(motion.div)`
+export const Button = styled(motion.button)`
   ${mixin.flex}
+  cursor: pointer;
   width: 100%;
   height: 50px;
   border-radius: 0.5rem;
@@ -135,7 +139,6 @@ export const Button = styled(motion.div)`
   color: ${color.white};
   font-size: 1.1rem;
   text-transform: uppercase;
-  cursor: pointer;
 `
 
 export const LinkContainer = styled(motion.div)`
