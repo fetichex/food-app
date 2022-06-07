@@ -4,15 +4,23 @@ import {
   Diets,
   DietsContainer,
   Image,
+  ImageDb,
   Header,
   Info
 } from './Card.styles'
+import dbImg from '../../static/img/dbImage.png'
 
 export const Card = ({ id, image, name, diets }) => {
   return (
     <>
       <Container to={`/recipe/${id}`}>
-        <Header>{<Image src={image} alt={name} />}</Header>
+        <Header>
+          {image ? (
+            <Image src={image} alt={name} />
+          ) : (
+            <ImageDb src={dbImg} alt={name} />
+          )}
+        </Header>
         <Info
           initial={{ opacity: 0 }}
           whileHover={{

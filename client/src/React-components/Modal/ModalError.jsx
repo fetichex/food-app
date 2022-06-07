@@ -2,13 +2,13 @@ import { useDispatch } from 'react-redux'
 import { closeModal } from '../../redux/modalSlice'
 import { ModalContainer, Card, BtnContainer, Button } from './Modal.styles'
 
-export const Modal = () => {
+export const ModalError = () => {
   const dispatch = useDispatch()
 
   return (
     <ModalContainer>
       <Card>
-        <h4>Recipe has been created.</h4>
+        <h4>enter the valid information and try again.</h4>
         <BtnContainer>
           <Button
             type="button"

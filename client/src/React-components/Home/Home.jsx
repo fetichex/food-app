@@ -26,7 +26,7 @@ export const Home = () => {
   const rejected = useSelector((state) => selectRejected(state))
   const recipes = useSelector((state) => getRecipesFilter(state))
   const [currentPage, setCurrentPage] = useState(1)
-  const [recipesPerPage] = useState(9)
+  const [recipesPerPage] = useState(6)
   const howManyPages = Math.ceil(recipes.length / recipesPerPage)
   const indexOfLastRecipe = currentPage * recipesPerPage
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage

@@ -84,5 +84,10 @@ export const Diets = styled.p`
 
 export const Image = styled.img`
   min-width: 100%;
-  object-fit: cover;
+  object-fit: contain;
+`
+export const ImageDb = styled.img`
+  min-width: 100%;
+  object-fit: contain;
+  aspect-ratio: 5/4;
 `

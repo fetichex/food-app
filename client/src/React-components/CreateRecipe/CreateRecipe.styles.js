@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import color from '../../styles/variables.styles'
 import { IoAlertCircleOutline } from 'react-icons/io5'
 import mixin from '../../styles/mixins'
-
+/* eslint-disable */
 export const Inputs = styled.div`
   margin-top: 2rem;
   display: flex;
@@ -26,7 +26,7 @@ export const MessageContainer = styled.div`
   margin-top: 10px;
   border-radius: 5px;
   border: 1px solid tomato;
-  display: ${(props) => (props.display ? 'block' : 'none')};
+  display: ${(props) => (props.display === 'hidden' ? 'none' : 'block')};
 `
 export const Message = styled.small`
   margin: 0;
@@ -46,11 +46,11 @@ export const Title = styled.input`
   font-size: 1.1rem;
   outline: none;
   border: ${(props) =>
-    props.error ? '2px solid tomato' : '2px solid transparent'};
+    props.error === 'hidden' ? '2px solid transparent' : '2px solid tomato'};
   border-radius: 5px;
 
   &:focus {
-    border: 2px solid ${color.lightBlue};
+    border: 2px solid ${color.blue};
   }
 `
 
@@ -69,16 +69,17 @@ export const Labeldiv = styled.div`
 `
 export const Health = styled.input`
   padding: 0.3rem;
-  width: 50px;
+  width: 55px;
   height: 40px;
   font-size: 1rem;
-  border: none;
+  border: ${(props) =>
+    props.error === 'hidden' ? '2px solid transparent' : '2px solid tomato'};
   text-align: center;
   border-radius: 5px;
   outline: none;
 
   &:focus {
-    border: 2px solid ${color.lightBlue};
+    border: 2px solid ${color.blue};
   }
 `
 
@@ -91,7 +92,9 @@ export const TextArea = styled.textarea`
   outline: none;
   border-radius: 5px;
   border: ${(props) =>
-    props.error ? '2px solid tomato' : '2px solid transparent'};
+    props.error && props.error === 'hidden'
+      ? '2px solid transparent'
+      : '2px solid tomato'};
 
   &:focus {
     border: 2px solid ${color.blue};
@@ -131,14 +134,14 @@ export const Buttons = styled.div`
 export const Button = styled(motion.button)`
   ${mixin.flex}
   cursor: pointer;
-  width: 100%;
+  width: 80%;
   height: 50px;
   border-radius: 0.5rem;
-  background-color: ${color.blue};
+  background-color: ${(props) =>
+    props.disabled ? color.lightBlue : color.blue};
   border: none;
   color: ${color.white};
   font-size: 1.1rem;
-  text-transform: uppercase;
 `
 
 export const LinkContainer = styled(motion.div)`
@@ -146,7 +149,7 @@ export const LinkContainer = styled(motion.div)`
   cursor: pointer;
   width: 30%;
   height: 30px;
-  border: none;
+  border: 2px solid tomato;
   border-radius: 0.5rem;
 `
 
@@ -155,10 +158,8 @@ export const BtnCancel = styled(Link)`
   width: 200px;
   height: 30px;
 `
-export const Text = styled.p`
+export const Text = styled(motion.p)`
   margin: 0;
   color: ${color.blue};
   font-size: 1.1rem;
-  text-transform: uppercase;
-  text-decoration: underline;
 `

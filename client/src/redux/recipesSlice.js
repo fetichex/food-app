@@ -111,7 +111,7 @@ const recipesSlice = createSlice({
     [createRecipe.pending]: (state) => {
       state.isLoading = true
     },
-    [createRecipe.fulfilled]: (state, action) => {
+    [createRecipe.fulfilled]: (state) => {
       state.isLoading = false
       state.rejected = false
     },

@@ -27,7 +27,7 @@ export const LinkContainer = styled(motion.div)`
   width: 200px;
   height: 50px;
   border-radius: 1rem;
-  background-color: ${color.lightGreen};
+  background-color: ${color.beige};
 `
 
 export const BtnCreate = styled(Link)`

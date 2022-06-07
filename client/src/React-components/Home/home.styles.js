@@ -21,6 +21,7 @@ export const AreaHeader = styled.header`
 export const AreaCards = styled.section`
   grid-area: cards;
   height: 100%;
+  ${mixin.flex('column', 'center', 'center')}
 `
 export const CardsContainer = styled.div`
   ${mixin.flex('row', 'center', 'space-between')}

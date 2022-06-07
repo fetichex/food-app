@@ -5,7 +5,7 @@ import color from '../../styles/variables.styles'
 
 export const Paginator = styled.div`
   ${mixin.flex};
-  width: 100%;
+  width: 400px;
   height: 50px;
   margin: 30px 0;
   gap: 10px;
@@ -18,7 +18,7 @@ export const Button = styled(motion.button)`
   outline: none;
   border: none;
   border-radius: 50px;
-  color: ${color.beige};
+  color: ${(props) => (props.active === 'active' ? '#000' : color.beige)};
   background-color: ${(props) =>
     props.active === 'active' ? 'tomato' : color.blue};
 `
