@@ -150,7 +150,8 @@ export const {
   setFilteredRecipes,
   setPage,
   nextPage,
-  prevPage
+  prevPage,
+  filterByScore
 } = recipesSlice.actions
 
 export default recipesSlice.reducer
