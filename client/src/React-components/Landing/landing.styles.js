@@ -52,7 +52,7 @@ export const GoToHome = styled(Link)`
 export const Text = styled.p`
   margin: 0;
   color: ${color.blue};
-  font-size: 2rem;
+  font-size: 1.8rem;
   text-transform: uppercase;
 `
 

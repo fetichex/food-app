@@ -1,19 +1,34 @@
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+/* eslint-disable */
+import {
+  getRecipesFilter,
+  setPage,
+  nextPage,
+  prevPage,
+  selectRejected
+} from '../../redux/recipesSlice'
 import {
   MdOutlineArrowBackIosNew,
   MdOutlineArrowForwardIos
 } from 'react-icons/md'
-import { Paginator, Button } from './Pagination.styles'
+import { Paginator, Button, ButtonArrow } from './Pagination.styles'
 
-export const Pagination = ({ howManyPages, setCurrentPage }) => {
+export const Pagination = ({ recipesPerPage }) => {
+  const dispatch = useDispatch()
+  const page = useSelector((state) => state.recipes.page)
+  const recipes = useSelector((state) => getRecipesFilter(state))
+  const rejected = useSelector((state) => selectRejected(state))
+  const howManyPages = Math.ceil(recipes.length / recipesPerPage)
+
   const numberOfPages = []
   for (let i = 1; i <= howManyPages; i++) {
     numberOfPages.push(i)
   }
-  const [currentButton, setCurrentButton] = useState(1)
-  const [arrOfCurrButtons, setArrOfCurrButtons] = useState([])
 
-  useEffect(() => {
+  // const [arrOfCurrButtons, setArrOfCurrButtons] = useState([])
+  // useEffect(() => {
+  /* 
     let tempNumberOfPages = [...arrOfCurrButtons]
 
     const dotsInitial = '...'
@@ -22,14 +37,14 @@ export const Pagination = ({ howManyPages, setCurrentPage }) => {
 
     if (numberOfPages.length < 6) {
       tempNumberOfPages = numberOfPages
-    } else if (currentButton >= 1 && currentButton <= 3) {
+    } else if (page >= 1 && page <= 3) {
       tempNumberOfPages = [1, 2, 3, 4, dotsInitial, numberOfPages.length]
-    } else if (currentButton === 4) {
+    } else if (page === 4) {
       const sliced = numberOfPages.slice(0, 5)
       tempNumberOfPages = [...sliced, dotsInitial, numberOfPages.length]
-    } else if (currentButton > 4 && currentButton < numberOfPages.length - 2) {
-      const sliced1 = numberOfPages.slice(currentButton - 2, currentButton)
-      const sliced2 = numberOfPages.slice(currentButton, currentButton + 1)
+    } else if (page > 4 && page < numberOfPages.length - 2) {
+      const sliced1 = numberOfPages.slice(page - 2, page)
+      const sliced2 = numberOfPages.slice(page, page + 1)
       tempNumberOfPages = [
         1,
         dotsLeft,
@@ -38,48 +53,46 @@ export const Pagination = ({ howManyPages, setCurrentPage }) => {
         dotsRight,
         numberOfPages.length
       ]
-    } else if (currentButton > numberOfPages.length - 3) {
+    } else if (page > numberOfPages.length - 3) {
       const sliced = numberOfPages.slice(numberOfPages.length - 4)
       tempNumberOfPages = [1, dotsLeft, ...sliced]
-    } else if (currentButton === dotsInitial) {
-      setCurrentButton(arrOfCurrButtons[arrOfCurrButtons.length - 3] + 1)
-    } else if (currentButton === dotsRight) {
-      setCurrentButton(arrOfCurrButtons[3] + 2)
-    } else if (currentButton === dotsLeft) {
-      setCurrentButton(arrOfCurrButtons[3] - 2)
+    } else if (page === dotsInitial) {
+      dispatch(setPage(arrOfCurrButtons[arrOfCurrButtons.length - 3] + 1))
+    } else if (page === dotsRight) {
+      dispatch(setPage(arrOfCurrButtons[3] + 2))
+    } else if (page === dotsLeft) {
+      dispatch(setPage(arrOfCurrButtons[3] - 2))
     }
 
     setArrOfCurrButtons(tempNumberOfPages)
-    setCurrentPage(currentButton)
-  }, [currentButton])
+    dispatch(setPage(page))
+  }, [page]) */
 
   return (
     <Paginator>
-      <Button
+      <ButtonArrow
         whileHover={{ scale: 1.1 }}
-        onClick={() =>
-          setCurrentButton((prev) => (prev <= 1 ? prev : prev - 1))
-        }>
+        onClick={() => dispatch(prevPage())}
+        disabled={page <= 1}>
         <MdOutlineArrowBackIosNew />
-      </Button>
-      {arrOfCurrButtons?.map((number, i) => (
-        <Button
-          whileHover={{ scale: 1.1 }}
-          key={i}
-          active={number === currentButton ? 'active' : ''}
-          onClick={() => setCurrentButton(number)}>
-          {number}
-        </Button>
-      ))}
-      <Button
+      </ButtonArrow>
+      {!rejected
+        ? numberOfPages?.map((number, i) => (
+            <Button
+              whileHover={{ scale: 1.1 }}
+              key={i}
+              active={number === page ? 'active' : ''}
+              onClick={() => dispatch(setPage(number))}>
+              {number}
+            </Button>
+          ))
+        : null}
+      <ButtonArrow
         whileHover={{ scale: 1.1 }}
-        onClick={() =>
-          setCurrentButton((prev) =>
-            prev >= numberOfPages.length ? prev : prev + 1
-          )
-        }>
+        onClick={() => dispatch(nextPage())}
+        disabled={page >= howManyPages}>
         <MdOutlineArrowForwardIos />
-      </Button>
+      </ButtonArrow>
     </Paginator>
   )
 }

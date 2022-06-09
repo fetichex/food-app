@@ -40,7 +40,7 @@ const getAllRecipes = async () => {
 
     return allRecipes.length !== 0 ? allRecipes : notFound()
   } catch (error) {
-    console.log(error)
+    return notFound()
   }
 }
 
@@ -69,7 +69,7 @@ const getRecipeByName = async (name) => {
 
     return result.length !== 0 ? result : notFound()
   } catch (error) {
-    console.log(error)
+    return notFound()
   }
 }
 

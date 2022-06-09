@@ -4,6 +4,7 @@ import { getRecipes, findRecipes, createRecipe } from './utils/thunk'
 const initialState = {
   recipes: [],
   filteredRecipes: [],
+  page: 1,
   isLoading: false,
   rejected: false
 }
@@ -64,6 +65,9 @@ const recipesSlice = createSlice({
         return 0
       })
     },
+    setAll: (state) => {
+      state.filteredRecipes = state.recipes
+    },
     setFilteredRecipes: (state, action) => {
       const totalRecipes = state.recipes
       const totalDiets = action.payload
@@ -78,6 +82,15 @@ const recipesSlice = createSlice({
         state.filteredRecipes = filterRecipes
         state.rejected = false
       }
+    },
+    setPage: (state, action) => {
+      state.page = action.payload
+    },
+    nextPage: (state) => {
+      state.page++
+    },
+    prevPage: (state) => {
+      state.page--
     }
   },
   extraReducers: {
@@ -133,7 +146,11 @@ export const {
   setRecipes,
   setMinorToMajor,
   setMajorToMinor,
-  setFilteredRecipes
+  setAll,
+  setFilteredRecipes,
+  setPage,
+  nextPage,
+  prevPage
 } = recipesSlice.actions
 
 export default recipesSlice.reducer

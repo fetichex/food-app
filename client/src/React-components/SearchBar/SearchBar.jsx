@@ -16,7 +16,6 @@ export const SearchBar = () => {
 
   const handleSubmit = () => {
     dispatch(findRecipes(value))
-    console.log(`Searching for ${value}`)
     setValue('')
   }
 

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import mixin from '../../styles/mixins'
 
 export const Label = styled.label`
   font-size: 1.1rem;
@@ -12,11 +13,8 @@ export const CheckBox = styled.input`
 `
 
 export const CheckBoxes = styled.div`
-  margin-top: 20px;
-  padding: 0 100px;
-  width: 380px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  padding-inline: 50px;
+  width: 100%;
+  height: auto;
+  ${mixin.flex('column', 'flex-start', 'center')}
 `

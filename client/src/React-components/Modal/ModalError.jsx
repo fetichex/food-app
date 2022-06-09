@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { closeModal } from '../../redux/modalSlice'
-import { ModalContainer, Card, BtnContainer, Button } from './Modal.styles'
+import { ModalContainer, Card, BtnContainer, ButtonError, IconError } from './Modal.styles'
+import { BiErrorCircle } from 'react-icons/bi'
 
 export const ModalError = () => {
   const dispatch = useDispatch()
@@ -8,15 +9,16 @@ export const ModalError = () => {
   return (
     <ModalContainer>
       <Card>
-        <h4>enter the valid information and try again.</h4>
+        <IconError><BiErrorCircle /></IconError>
+        <h4>Enter the valid information and try again!</h4>
         <BtnContainer>
-          <Button
+          <ButtonError
             type="button"
             onClick={() => {
               dispatch(closeModal())
             }}>
             confirm
-          </Button>
+          </ButtonError>
         </BtnContainer>
       </Card>
     </ModalContainer>

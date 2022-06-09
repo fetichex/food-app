@@ -1,28 +1,19 @@
 import { createGlobalStyle } from 'styled-components'
-import OleoScriptSwashCapsBold from '../static/fonts/OleoScriptSwashCapsBold.ttf'
-import QuicksandMedium from '../static/fonts/QuicksandMedium.ttf'
-import QuicksandSemiBold from '../static/fonts/QuicksandSemiBold.ttf'
 import FrederickatheGreatRegular from '../static/fonts/FrederickatheGreatRegular.ttf'
-import color from './variables.styles'
+import MontserratSemiBold from '../static/fonts/MontserratSemiBold.ttf'
+// import color from './variables.styles'
 const Global = createGlobalStyle`
 
 @font-face {
-  font-family: 'OleoScriptSwashCapsBold';
-  src: url(${OleoScriptSwashCapsBold}) format('truetype');
+  font-family: 'MontserratSemiBold';
+  src: url(${MontserratSemiBold}) format('truetype');
 };
-@font-face {
-  font-family: 'QuicksandMedium';
-  src: url(${QuicksandMedium}) format('truetype');
-}
+
 @font-face {
   font-family: 'FrederickatheGreatRegular';
   src: url(${FrederickatheGreatRegular}) format('truetype');
 }
 
-@font-face {
-  font-family: 'QuicksandSemiBold';
-  src: url(${QuicksandSemiBold}) format('truetype');
-}
 
 input[type="number"]::-webkit-outer-spin-button, 
 input[type="number"]::-webkit-inner-spin-button {
@@ -31,6 +22,10 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 *, *::before, *::after {
@@ -56,8 +51,8 @@ body {
   -webkit-font-feature-settings: 'liga';
   font-feature-settings: 'liga';
   min-height: 100vh;
-  background-color: ${color.beige};
-  font-family: 'QuicksandSemiBold', sans-serif;
+  background: linear-gradient(180deg, rgba(255,247,213,1) 50%, rgba(255,237,172,1) 100%);
+  font-family: 'MontserratSemiBold', sans-serif;
 }
 
 html,

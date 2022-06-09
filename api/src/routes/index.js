@@ -7,7 +7,7 @@ const Diets = require('../db.js').Diets
 
 router.use('/recipes', recipeRoute)
 router.use('/diets', typeRoute)
-router.use('/prueba', async (req, res) => {
+router.use('/prueba', async (_, res) => {
   const data = await Diets.findAll({
     attributes: ['id', 'name'],
     where: { id: [1, 3, 5, 7] }

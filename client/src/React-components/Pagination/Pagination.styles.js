@@ -13,12 +13,17 @@ export const Paginator = styled.div`
 
 export const Button = styled(motion.button)`
   cursor: pointer;
-  width: 35px;
-  height: 25px;
+  height: 30px;
   outline: none;
   border: none;
-  border-radius: 50px;
-  color: ${(props) => (props.active === 'active' ? '#000' : color.beige)};
+  border-radius: 5px;
+  color: ${(props) => (props.active === 'active' ? color.beige : color.blue)};
   background-color: ${(props) =>
-    props.active === 'active' ? 'tomato' : color.blue};
+    props.active === 'active' ? color.blue : 'transparent'};
+`
+
+export const ButtonArrow = styled(Button)`
+  color: ${color.beige};
+  background-color: ${(props) =>
+    props.disabled ? color.lightBlue : color.blue};
 `

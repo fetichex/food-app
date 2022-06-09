@@ -2,13 +2,11 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getDiets } from '../../redux/utils/thunk'
 import { selectDiets } from '../../redux/dietsSlice'
-import { setFilteredRecipes } from '../../redux/recipesSlice'
-// import { selectRecipes } from '../../redux/recipesSlice'
+import { setFilteredRecipes, setPage } from '../../redux/recipesSlice'
 import { Label, CheckBox, CheckBoxes } from './Filter.styles'
 
 const Filter = () => {
   const diets = useSelector((state) => selectDiets(state))
-  // const recipes = useSelector((state) => selectRecipes(state))
   const [selected, setSelected] = useState([])
   const dispatch = useDispatch()
 
@@ -21,6 +19,7 @@ const Filter = () => {
       selected.push(name)
     }
     setSelected([...selected])
+    dispatch(setPage(1))
     dispatch(setFilteredRecipes(selected))
   }
   useEffect(() => {

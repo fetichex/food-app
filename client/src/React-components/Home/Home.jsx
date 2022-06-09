@@ -9,6 +9,7 @@ import { getRecipes } from '../../redux/utils/thunk'
 import { Header } from '../Header/Header'
 import { Card } from '../Card/Card'
 import { Pagination } from '../Pagination/Pagination'
+import Loading from '../Loading/Loading'
 import Ordener from '../Controls/Ordener'
 import Filter from '../Controls/Filter'
 import {
@@ -25,10 +26,9 @@ export const Home = () => {
   const isLoading = useSelector((state) => selectIsLoading(state))
   const rejected = useSelector((state) => selectRejected(state))
   const recipes = useSelector((state) => getRecipesFilter(state))
-  const [currentPage, setCurrentPage] = useState(1)
-  const [recipesPerPage] = useState(6)
-  const howManyPages = Math.ceil(recipes.length / recipesPerPage)
-  const indexOfLastRecipe = currentPage * recipesPerPage
+  const page = useSelector((state) => state.recipes.page)
+  const [recipesPerPage] = useState(9)
+  const indexOfLastRecipe = page * recipesPerPage
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage
   const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
 
@@ -37,7 +37,7 @@ export const Home = () => {
   }, [dispatch])
 
   if (isLoading) {
-    return <h1>Loading...</h1>
+    return <Loading />
   }
 
   return (
@@ -46,24 +46,21 @@ export const Home = () => {
         <AreaHeader>
           <Header />
         </AreaHeader>
+        <Controls>
+          <div className="div_uno">
+            <p className="p_uno">Order by</p>
+            <Ordener />
+          </div>
+          <div className="div_uno">
+            <p className="p_uno">Filter by</p>
+            <Filter />
+          </div>
+        </Controls>
         <AreaCards>
           <div>
-            <Pagination
-              howManyPages={howManyPages}
-              setCurrentPage={setCurrentPage}
-            />
+            <Pagination recipesPerPage={recipesPerPage} />
           </div>
           <CardsContainer>
-            <Controls>
-              <div>
-                <p>Order by</p>
-                <Ordener />
-              </div>
-              <div>
-                <p>Filter by</p>
-                <Filter />
-              </div>
-            </Controls>
             {/* eslint-disable */}
             {!!rejected ? (
               <h1>No recipes</h1>

@@ -6,7 +6,7 @@ export const createRecipe = createAsyncThunk(
   async (recipe, thunkAPI) => {
     try {
       const response = await axios.post('http://localhost:3001/recipes', recipe)
-      console.log('recipe created', response.data)
+      return response.data
     } catch (error) {
       return thunkAPI.rejectWithValue(error)
     }

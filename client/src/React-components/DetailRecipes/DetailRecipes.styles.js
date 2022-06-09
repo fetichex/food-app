@@ -39,19 +39,21 @@ export const Body = styled.section`
 
 export const Summary = styled.div`
   width: 100%;
-  min-height: 10%;
+  height: 50%;
   padding: 20px;
   background-color: ${color.lightBlue};
   border-radius: 10px;
-`
+  overflow-y: scroll;
+  `
 
 export const Steps = styled.div`
   width: 100%;
-  min-height: 300px;
+  height: 50%;
   padding: 20px;
   padding-left: 40px;
   background-color: ${color.lightGreen};
   border-radius: 10px;
+  overflow-y: scroll;
 
   h3 {
     margin-top: 0;

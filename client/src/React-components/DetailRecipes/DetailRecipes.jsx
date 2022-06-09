@@ -18,7 +18,8 @@ import {
   HealthScore,
   Summary
 } from './DetailRecipes.styles'
-// import { recipe } from './mock'
+import Loading from '../Loading/Loading'
+import dbImage from '../../static/img/dbImage.png'
 
 export const DetailRecipes = () => {
   const detail = useSelector(selectDetailRecipe)
@@ -27,11 +28,10 @@ export const DetailRecipes = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getDetail(id))
-    console.log(detail)
   }, [dispatch, id])
 
   if (isLoading) {
-    return <h1>Loading...</h1>
+    return <Loading />
   }
 
   return (
@@ -41,7 +41,7 @@ export const DetailRecipes = () => {
           <h1>{detail.title || detail.name}</h1>
         </Header>
         <Aside>
-          <Image src={detail.image} alt={detail.name} />
+          <Image src={!detail.image ? dbImage : detail.image } alt={detail.name} />
           <HealthScore>
             <h3>Healt score:</h3>
             <span>{detail.healthScore}</span>

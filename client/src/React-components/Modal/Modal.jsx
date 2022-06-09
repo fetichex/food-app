@@ -1,6 +1,13 @@
 import { useDispatch } from 'react-redux'
 import { closeModal } from '../../redux/modalSlice'
-import { ModalContainer, Card, BtnContainer, Button } from './Modal.styles'
+import {
+  ModalContainer,
+  Card,
+  BtnContainer,
+  ButtonSuccess,
+  IconSuccess
+} from './Modal.styles'
+import { BiCheckCircle } from 'react-icons/bi'
 
 export const Modal = () => {
   const dispatch = useDispatch()
@@ -8,15 +15,18 @@ export const Modal = () => {
   return (
     <ModalContainer>
       <Card>
+        <IconSuccess>
+          <BiCheckCircle />
+        </IconSuccess>
         <h4>Recipe has been created.</h4>
         <BtnContainer>
-          <Button
+          <ButtonSuccess
             type="button"
             onClick={() => {
               dispatch(closeModal())
             }}>
             confirm
-          </Button>
+          </ButtonSuccess>
         </BtnContainer>
       </Card>
     </ModalContainer>

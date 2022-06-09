@@ -86,7 +86,7 @@ export const Health = styled.input`
 export const TextArea = styled.textarea`
   padding: 0.5rem;
   width: 450px;
-  height: 100px;
+  height: 90px;
   border: none;
   resize: none;
   outline: none;
@@ -118,7 +118,7 @@ export const CheckBoxes = styled.div`
   ${mixin.flex('column', 'flex-start', 'space-evenly')}
   padding-left: 10px;
   width: 450px;
-  height: 140px;
+  height: 180px;
   flex-wrap: wrap;
 `
 

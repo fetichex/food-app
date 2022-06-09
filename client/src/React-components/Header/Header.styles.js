@@ -18,7 +18,7 @@ export const Logo = styled.div`
   h1 {
     margin: 0;
     font-size: 3rem;
-    color: ${color.beige};
+    color: ${color.white};
   }
 `
 export const LinkContainer = styled(motion.div)`
