@@ -3,8 +3,8 @@ import { useDispatch /* , useSelector */ } from 'react-redux'
 import { BsSearch } from 'react-icons/bs'
 
 import { SearchBtn, Input, Search } from './SearchBar.styles'
-// import { findRecipes } from '../../redux/utils/thunk'
-import { setPage, filterByScore } from '../../redux/recipesSlice'
+import { findRecipes } from '../../redux/utils/thunk'
+import { setPage } from '../../redux/recipesSlice'
 
 export const SearchBar = () => {
   // const page = useSelector(state => state.recipes.page)
@@ -17,7 +17,7 @@ export const SearchBar = () => {
   }
 
   const handleSubmit = () => {
-    dispatch(filterByScore(value))
+    dispatch(findRecipes(value))
     setValue('')
     dispatch(setPage(1))
   }

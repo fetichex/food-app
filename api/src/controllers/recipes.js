@@ -3,7 +3,7 @@ const { toDTO } = require('../utils.js')
 const { Recipes, Diets, recipesDiets, Op } = require('../db.js')
 const { notFound } = require('./notFound.js')
 const axios = require('axios')
-const { URL_PATH, API_KEY_dos } = process.env
+const { URL_PATH, API_KEY } = process.env
 const UUID =
   /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/
 
@@ -24,7 +24,7 @@ const createRecipe = async (name, summary, healthScore, steps, diets) => {
 const getAllRecipes = async () => {
   try {
     const apiRecipes = await axios.get(
-      `${URL_PATH}complexSearch?apiKey=${API_KEY_dos}&addRecipeInformation=true&number=100`
+      `${URL_PATH}complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
     )
     const dbRecipes = await Recipes.findAll({
       include: [
@@ -48,7 +48,7 @@ const getRecipeByName = async (name) => {
   const nameFormated = `%${name.toUpperCase().replace(' ', '% %')}%`
   try {
     const apiRecipes = await axios.get(
-      `${URL_PATH}complexSearch?apiKey=${API_KEY_dos}&query=${name}&addRecipeInformation=true`
+      `${URL_PATH}complexSearch?apiKey=${API_KEY}&query=${name}&addRecipeInformation=true`
     )
     const dbRecipes = await Recipes.findAll({
       where: {
@@ -89,7 +89,7 @@ const getRecipeById = async (id) => {
   } else {
     try {
       const recipes = await axios.get(
-        `${URL_PATH}${id}/information?apiKey=${API_KEY_dos}`
+        `${URL_PATH}${id}/information?apiKey=${API_KEY}`
       )
       const recipe = {
         id: recipes.data.id,
