@@ -17,7 +17,6 @@ export const SearchBar = () => {
   }
 
   const handleSubmit = () => {
-    console.log(value)
     dispatch(findRecipes(value))
     setValue('')
     dispatch(setPage(1))
