@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import color from '../../styles/variables.styles'
 
@@ -38,6 +38,7 @@ export const LinkContainer = styled(motion.div)`
   height: 50px;
   border-radius: 1rem;
   transition: background-color 0.2s ease-in;
+  border: 3px solid ${color.lightGreen};
 
   &:hover {
     transition: background-color 0.2s ease-in;
@@ -45,7 +46,7 @@ export const LinkContainer = styled(motion.div)`
   }
 `
 
-export const GoToHome = styled(Link)`
+export const GoToHome = styled(NavLink)`
   ${mixinFlex()}
 `
 

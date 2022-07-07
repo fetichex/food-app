@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import mixin from '../../styles/mixins'
 import color from '../../styles/variables.styles'
 
@@ -30,7 +30,7 @@ export const LinkContainer = styled(motion.div)`
   background-color: ${color.beige};
 `
 
-export const BtnCreate = styled(Link)`
+export const BtnCreate = styled(NavLink)`
   ${mixin.flex}
   width: 200px;
   height: 40px;
